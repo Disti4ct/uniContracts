@@ -31,7 +31,7 @@ async function v2Fixture([wallet, other], provider) {
   // deploy V2
   const factoryV2 = await ethereumWaffle.deployContract(wallet, Factory, [
     wallet.address,
-    other.address,
+    wallet.address,
   ])
   const router02 = await ethereumWaffle.deployContract(wallet, RouterV2, [
     factoryV2.address,
@@ -70,7 +70,7 @@ async function factoryFixture([adminW, devW]) {
 
   const factory = await ethereumWaffle.deployContract(adminW, Factory, [
     adminW.address,
-    devW.address,
+    adminW.address,
   ])
 
   return { factory }
