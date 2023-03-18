@@ -29,9 +29,9 @@ contract Factory is IFactory {
         _;
     }
 
-    constructor(address _feeToSetter, address _OnoutFeeSetter, address _OnoutFeeTo) {
+    constructor(address _feeToSetter, address _OnoutFeeTo) {
         feeToSetter = _feeToSetter;
-        OnoutFeeSetter = _OnoutFeeSetter;
+        OnoutFeeSetter = _feeToSetter;
         OnoutFeeTo = _OnoutFeeTo;
         totalFee = 3;
         protocolFee = 2000;
