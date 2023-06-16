@@ -1,4 +1,4 @@
-# 1) option
+# Option N1
 
 > Do not forget to install Truffle: `npm i -g truffle`.
 > Add an explorer API key in the **.env** file. Import it and add in the truffle config:
@@ -23,7 +23,7 @@ api_keys: {
 
 More info: https://github.com/rkalis/truffle-plugin-verify
 
-# 2) option (verify many files as one)
+# Option N2 (verify many files as one)
 
 1. install this package: https://github.com/NomicFoundation/truffle-flattener
 
@@ -42,3 +42,7 @@ More info: https://github.com/rkalis/truffle-plugin-verify
 4. go to the blockchain explorer and start contract verification (you might see something like "Verify Contract" somewhere in the interface). Choose **Solidity (Single file)** as a Compiler Type. Take other parameters from `truffle-config.js` under **compilers** config value
 
 > it's better do not save **flatten** files, because we will have many same contracts. It can cause some problems when you compile/deploy/verify
+
+# Option N3
+
+1. Use this service and follow the instructions: https://sourcify.dev/
