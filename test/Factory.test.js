@@ -45,7 +45,7 @@ describe('Factory', () => {
     const allInfo = await factory.allInfo()
     const { feeTo } = allInfo
 
-    await chai.expect(feeTo).to.eq(other.address)
+    chai.expect(feeTo).to.eq(other.address)
   })
 
   it('correct total and protocol fees', async () => {
@@ -53,8 +53,8 @@ describe('Factory', () => {
 
     const { protocolFee, totalFee } = await factory.allInfo()
 
-    await chai.expect(protocolFee).to.eq(5000)
-    await chai.expect(totalFee).to.eq(10)
+    chai.expect(protocolFee).to.eq(5000)
+    chai.expect(totalFee).to.eq(10)
   })
 
   async function createPair(tokens) {
@@ -132,19 +132,30 @@ describe('Factory', () => {
       .to.be.revertedWith('Factory: FORBIDDEN')
   })
 
-  it('reverts on devFee and devFeeSetter', async () => {
+  it('should revert for a non admin wallets', async () => {
     await chai
-      .expect(factory.connect(other).setDevFeePercent(110))
+      .expect(factory.connect(other).setOnoutFeePercent(10))
+      .to.be.revertedWith('Factory: FORBIDDEN')
+    await chai
+      .expect(factory.connect(other).setOnoutFeeTo(wallet.address))
+      .to.be.revertedWith('Factory: FORBIDDEN')
+    await chai
+      .expect(factory.connect(other).setOnoutFeeSetter(wallet.address))
+      .to.be.revertedWith('Factory: FORBIDDEN')
+  })
+
+  it('should correctly change Onout parameters', async () => {
+    await chai
+      .expect(factory.setOnoutFeePercent(110))
       .to.be.revertedWith('Factory: WRONG_PERCENTAGE')
-    await chai
-      .expect(factory.setDevFeePercent(40))
-      .to.be.revertedWith('Factory: FORBIDDEN')
-    await chai
-      .expect(factory.setDevFeeTo(wallet.address))
-      .to.be.revertedWith('Factory: FORBIDDEN')
-    await chai
-      .expect(factory.setDevFeeSetter(wallet.address))
-      .to.be.revertedWith('Factory: FORBIDDEN')
+
+    await factory.setOnoutFeePercent(40)
+    await factory.setOnoutFeeTo(other.address)
+    await factory.setOnoutFeeSetter(other.address)
+
+    chai.expect(await factory.OnoutFeePercent()).to.eq(40)
+    chai.expect(await factory.OnoutFeeTo()).to.eq(other.address)
+    chai.expect(await factory.OnoutFeeSetter()).to.eq(other.address)
   })
 
   it('revert on increasing swaps counter', async () => {
