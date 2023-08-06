@@ -37,6 +37,6 @@
     "solc": "^0.8.11",
     "truffle": "^5.8.1",
     "truffle-contract-size": "^2.0.1",
-    "truffle-plugin-verify": "^0.5.25"
+    "truffle-plugin-verify": "^0.6.4"
   }
 }

@@ -12,6 +12,7 @@ const {
   BSCSCAN_API_KEY,
   POLYGON_API_KEY,
   CRONOS_API_KEY,
+  BASE_API_KEY,
 } = config.parsed
 
 module.exports = {
@@ -59,5 +60,6 @@ module.exports = {
     bscscan: BSCSCAN_API_KEY,
     polygonscan: POLYGON_API_KEY,
     cronoscan: CRONOS_API_KEY,
+    basescan: BASE_API_KEY,
   },
 }
